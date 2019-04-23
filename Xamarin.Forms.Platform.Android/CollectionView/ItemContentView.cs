@@ -26,7 +26,12 @@ namespace Xamarin.Forms.Platform.Android
 		internal void Recycle()
 		{
 			Content.Element.MeasureInvalidated -= ElementMeasureInvalidated;
-			RemoveView(Content.View);
+			
+			if(Content?.View != null)
+			{
+				RemoveView(Content.View);
+			}
+			
 			Content = null;
 		}
 
