@@ -20,7 +20,6 @@
 		<PackageReference Include="System.ValueTuple" Version="4.5.0" />
 	</ItemGroup>	
 	<PropertyGroup>
-		<IncludeAssemblyInfo>true</IncludeAssemblyInfo>
     <GitInfoReportImportance>high</GitInfoReportImportance>
   </PropertyGroup>
 	<Import Project="..\Xamarin.Flex\Xamarin.Flex.projitems" Label="Shared" Condition="Exists('..\Xamarin.Flex\Xamarin.Flex.projitems')" />

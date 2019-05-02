@@ -1,9 +1,8 @@
 <Project>
-  <ItemGroup Condition="'$(IncludeAssemblyInfo)' == 'true'">
+  <ItemGroup>
     <PackageReference Include="GitInfo" Version="2.0.20" PrivateAssets="All" />
 	  <PackageReference Include="MSBuilder.GenerateAssemblyInfo" Version="0.2.1" PrivateAssets="All" />
-		<!-- <Compile Include="..\Xamarin.Forms.Core\Properties\GlobalAssemblyInfo.cs" Link="Properties\GlobalAssemblyInfo.cs" /> -->
 	</ItemGroup>
 
-  <Import Project="Version.targets" Condition="'$(IncludeAssemblyInfo)' == 'true'"/>
+  <Import Project="Version.targets" />
  </Project>
