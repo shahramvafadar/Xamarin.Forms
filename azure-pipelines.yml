@@ -92,7 +92,7 @@ jobs:
     displayName: Build Android [Legacy Renderers]
     vmImage: $(macOSVmImage)
     targetFolder: Xamarin.Forms.ControlGallery.Android/legacyRenderers/
-    androidProjectArguments: '/t:"Rebuild;SignAndroidPackage"'
+    androidProjectArguments: '/t:"Rebuild;SignAndroidPackage" /bl'
     dependsOn: Phase_1
     buildConfiguration: $(DefaultBuildConfiguration)
 
@@ -102,7 +102,7 @@ jobs:
     displayName: Build Android [Pre-AppCompat]
     vmImage: $(macOSVmImage)
     targetFolder: Xamarin.Forms.ControlGallery.Android/preAppCompat
-    androidProjectArguments: '/t:"Rebuild;SignAndroidPackage" /p:DefineConstants="TRACE DEBUG FORMS_APPLICATION_ACTIVITY APP"'
+    androidProjectArguments: '/t:"Rebuild;SignAndroidPackage" /p:DefineConstants="TRACE DEBUG FORMS_APPLICATION_ACTIVITY APP" /bl'
     dependsOn: Phase_1
     buildConfiguration: $(DefaultBuildConfiguration)
 
@@ -112,7 +112,7 @@ jobs:
     displayName: Build Android [Fast Renderers]
     vmImage: $(macOSVmImage)
     targetFolder: Xamarin.Forms.ControlGallery.Android/newRenderers/
-    androidProjectArguments: '/t:"Rebuild;SignAndroidPackage" /p:DefineConstants="TRACE DEBUG TEST_EXPERIMENTAL_RENDERERS APP"'
+    androidProjectArguments: '/t:"Rebuild;SignAndroidPackage" /p:DefineConstants="TRACE DEBUG TEST_EXPERIMENTAL_RENDERERS APP" /bl'
     dependsOn: Phase_1
     buildConfiguration: $(DefaultBuildConfiguration)
 
