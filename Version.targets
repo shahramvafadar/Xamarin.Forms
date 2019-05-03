@@ -9,7 +9,7 @@
           DependsOnTargets="GitVersion"
           Returns="$(Version)"
          >
-    
+
     <ItemGroup>
       <VersionMetadata Include="$(GitCommits)" Condition="'$(GitSemVerDashLabel)' == ''" />
 
