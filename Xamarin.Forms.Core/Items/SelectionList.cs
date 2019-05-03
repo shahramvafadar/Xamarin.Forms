@@ -13,6 +13,7 @@ namespace Xamarin.Forms
 
 		readonly IList<object> _internal;
 		IList<object> _shadow;
+		bool _fromRenderer;
 
 		public SelectionList(SelectableItemsView selectableItemsView, IList<object> items = null)
 		{
@@ -28,6 +29,11 @@ namespace Xamarin.Forms
 
 		private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
 		{
+			if (_fromRenderer)
+			{
+				return;
+			}
+
 			_selectableItemsView.SelectedItemsPropertyChanged(_shadow, _internal);
 			_shadow = Copy();
 		}
@@ -39,14 +45,20 @@ namespace Xamarin.Forms
 
 		public void Add(object item)
 		{
+			_fromRenderer = true;
 			_internal.Add(item);
+			_fromRenderer = false;
+
 			_selectableItemsView.SelectedItemsPropertyChanged(_shadow, _internal);
 			_shadow.Add(item);
 		}
 
 		public void Clear()
 		{
+			_fromRenderer = true;
 			_internal.Clear();
+			_fromRenderer = false;
+
 			_selectableItemsView.SelectedItemsPropertyChanged(_shadow, s_empty);
 			_shadow.Clear();
 		}
@@ -73,14 +85,19 @@ namespace Xamarin.Forms
 
 		public void Insert(int index, object item)
 		{
+			_fromRenderer = true;
 			_internal.Insert(index, item);
+			_fromRenderer = false;
+
 			_selectableItemsView.SelectedItemsPropertyChanged(_shadow, _internal);
 			_shadow.Insert(index, item);
 		}
 
 		public bool Remove(object item)
 		{
+			_fromRenderer = true;
 			var removed = _internal.Remove(item);
+			_fromRenderer = false;
 
 			if (removed)
 			{
@@ -93,7 +110,10 @@ namespace Xamarin.Forms
 
 		public void RemoveAt(int index)
 		{
+			_fromRenderer = true;
 			_internal.RemoveAt(index);
+			_fromRenderer = false;
+
 			_selectableItemsView.SelectedItemsPropertyChanged(_shadow, _internal);
 			_shadow.RemoveAt(index);
 		}
@@ -112,18 +132,6 @@ namespace Xamarin.Forms
 			}
 
 			return items;
-		}
-
-		public void ClearQuietly()
-		{
-			_internal.Clear();
-			_shadow.Clear();
-		}
-
-		public void AddQuietly(object item)
-		{
-			_internal.Add(item);
-			_shadow.Add(item);
 		}
 	}
 }

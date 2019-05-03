@@ -17,7 +17,7 @@ namespace Xamarin.Forms
 
 		public static readonly BindableProperty SelectedItemsProperty =
 			BindableProperty.Create(nameof(SelectedItems), typeof(IList<object>), typeof(SelectableItemsView), null,
-				defaultBindingMode: BindingMode.TwoWay,
+				defaultBindingMode: BindingMode.OneWay,
 				propertyChanged: SelectedItemsPropertyChanged,
 				coerceValue: CoerceSelectedItems,
 				defaultValueCreator: DefaultValueCreator);

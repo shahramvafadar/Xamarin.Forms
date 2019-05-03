@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -29,11 +28,11 @@ namespace Xamarin.Forms.Controls.GalleryPages.CollectionViewGalleries.SelectionG
 			{
 				Items[1], Items[2]
 			};
+		}
 
-			SelectedItems.CollectionChanged += (sender, args) => 
-			{
-				OnPropertyChanged(nameof(SelectedItemsText));
-			};
+		private void SelectedItemsCollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+		{
+			OnPropertyChanged(nameof(SelectedItemsText));
 		}
 
 		void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -56,7 +55,15 @@ namespace Xamarin.Forms.Controls.GalleryPages.CollectionViewGalleries.SelectionG
 			get => _selectedItems;
 			set
 			{
+				if (_selectedItems != null)
+				{
+					_selectedItems.CollectionChanged -= SelectedItemsCollectionChanged;
+				}
+
 				_selectedItems = value;
+
+				_selectedItems.CollectionChanged += SelectedItemsCollectionChanged;
+
 				OnPropertyChanged();
 				OnPropertyChanged(nameof(SelectedItemsText));
 			}
@@ -68,18 +75,6 @@ namespace Xamarin.Forms.Controls.GalleryPages.CollectionViewGalleries.SelectionG
 			set { _items = value; OnPropertyChanged(); }
 		}
 
-		public string SelectedItemsText
-		{
-			get
-			{
-				var acc = "";
-				foreach (var item in SelectedItems)
-				{
-					acc += item.ToString();
-				}
-
-				return acc;
-			}
-		}
+		public string SelectedItemsText => SelectedItems.ToCommaSeparatedList();
 	}
 }
