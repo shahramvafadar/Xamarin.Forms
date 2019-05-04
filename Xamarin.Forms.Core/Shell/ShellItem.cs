@@ -11,7 +11,7 @@ namespace Xamarin.Forms
 	[EditorBrowsable(EditorBrowsableState.Always)]
 	public class FlyoutItem : ShellItem
 	{
-		public ShellSectionCollection Tabs => Items;
+		public IList<ShellSection> Tabs => Items;
 	}
 
 	[ContentProperty(nameof(Items))]
@@ -95,7 +95,7 @@ namespace Xamarin.Forms
 			set { SetValue(CurrentItemProperty, value); }
 		}
 
-		public ShellSectionCollection Items => (ShellSectionCollection)GetValue(ItemsProperty);
+		public IList<ShellSection> Items => (ShellSectionCollection)GetValue(ItemsProperty);
 
 		internal override ReadOnlyCollection<Element> LogicalChildrenInternal => _logicalChildren ?? (_logicalChildren = new ReadOnlyCollection<Element>(_children));
 
