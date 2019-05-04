@@ -27,7 +27,7 @@ steps:
        $prefix = $env:SUFFIX
        Write-Host("Pre FormsVersion = $preXamForms $prefix")
        Write-Host("MSBUILD packageVersion = $(pacakageVersion)")
-       $packageVer = $(pacakageVersion)
+       $packageVer = "$(pacakageVersion)"
        if(!$preXamForms)
        {
           $formsNugetVersion = $env:major + "." + $env:minor + "." + $env:patch + "." + $env:buildversion
